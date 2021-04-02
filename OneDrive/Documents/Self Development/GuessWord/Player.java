@@ -29,4 +29,9 @@ public class Player
     {
         return name;
     }
+    
+    public void print()
+    {
+        System.out.println("You have " + livesLeft + " lives left!");
+    }
 }

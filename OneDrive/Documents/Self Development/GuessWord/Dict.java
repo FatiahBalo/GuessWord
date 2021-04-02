@@ -9,7 +9,7 @@ public class Dict
         wordArray = new String[10];
         readFile(fileName);
         randomize();
-        System.out.println("All Done"); //comment out later
+        //System.out.println("All Done"); //comment out later
     }
     
     private void readFile(String filename)
@@ -31,7 +31,7 @@ public class Dict
                 else 
                 {
                     copy();
-                    System.out.println("Array resize successful"); //comment out later
+                    //System.out.println("Array resize successful"); //comment out later
                 }
             }
         }

@@ -5,11 +5,13 @@ public class Game
 {
    String fileName; 
    Dict dictionary;
+   Player player;
    int wordLen;
    char[] chars; //this array holds the characters of the word to be guessed
    int cnt = 0; 
-   Game()
+   Game(Player newPlayer)
    {
+       player = newPlayer;
        Scanner scnr = new Scanner(System.in);
        System.out.println("Enter the name of the dictonary file with .txt: ");
        fileName = scnr.nextLine();
@@ -41,7 +43,10 @@ public class Game
                for (int i = 0; i<spot.length; i++)
                {
                    if(guess[spot[i]] !='\u0000')
-                   {System.out.println("The letter has been entered previously");}
+                   {
+                       System.out.println("The letter has been entered previously");
+                       player.loseLife(); player.print();
+                   }
                    else
                    {
                        guess[spot[i]] = chrs;
@@ -51,11 +56,20 @@ public class Game
            else
            {
                System.out.println("Letter not present in word, enter another letter");
+               player.loseLife(); player.print();
            }
            System.out.println(print(guess));
-       }while (temp != null && !checkWord(guess));
+       }while (temp != null && !checkWord(guess) && player.getLivesLeft() !=0);
        
-       System.out.println("Done entries"); //placeholder to indicate parts of code run
+       
+       if(!checkWord(guess) && player.getLivesLeft() ==0)
+       {
+           System.out.println("You did not guess the word correctly. The correct word is " + print(chars));
+       }
+       else
+       {
+           System.out.println("Congratulations, " + player.getName() + " ! You guessed the correct word.");
+       }
    }
    
    private int[] charSpot(char toCheck, int charcnt)
@@ -117,4 +131,6 @@ public class Game
        }
        return output;
    }
+   
+   
 }
